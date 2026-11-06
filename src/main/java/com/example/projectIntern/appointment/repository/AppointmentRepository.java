@@ -1,0 +1,25 @@
+package com.example.projectIntern.appointment.repository;
+
+import com.example.projectIntern.appointment.entity.Appointment;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Repository
+public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
+
+    long countByAppointmentDate(LocalDate date);
+
+//  Lấy lịch hẹn phân trang của RIÊNG Bác sĩ đó
+    Page<Appointment> findByDoctorUserId(Long userId, Pageable pageable);
+
+
+    @Query("SELECT a FROM Appointment a WHERE LOWER(a.patient.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR a.patient.phone LIKE CONCAT('%', :keyword, '%')")
+    List<Appointment> searchAppointments(@Param("keyword") String keyword);
+}
