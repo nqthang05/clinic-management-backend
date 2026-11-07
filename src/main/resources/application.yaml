@@ -2,8 +2,8 @@
 spring:
   datasource:
     url: "jdbc:mysql://localhost:3306/clinic_management?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
-    username: root
-    password: 
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jackson:
@@ -18,3 +18,7 @@ spring:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
+jwt:
+  # Ép buộc phải truyền từ biến môi trường, không có giá trị hardcode
+  secret: ${JWT_SECRET_KEY}
+  expiration: ${JWT_EXPIRATION:86400000}
