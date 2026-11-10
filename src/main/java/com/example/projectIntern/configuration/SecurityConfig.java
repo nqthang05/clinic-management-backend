@@ -38,7 +38,7 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         // Cổng mặc định của React (3000) và Vite (5173).
         // Dấu * là cho phép tất cả, nhưng ở thực tế nên ghi rõ domain.
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000","https://clinic-management-frontend-xi.vercel.app"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:3000","https://clinic-management-frontend-3fuy.vercel.app"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true);

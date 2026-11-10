@@ -22,3 +22,6 @@ jwt:
   # Ép buộc phải truyền từ biến môi trường, không có giá trị hardcode
   secret: ${JWT_SECRET_KEY}
   expiration: ${JWT_EXPIRATION:86400000}
+
+server:
+  port: ${PORT:8080}
