@@ -1,6 +1,7 @@
 package com.example.projectIntern.appointment.dto;
 
 import com.example.projectIntern.common.enums.AppointmentStatus;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +18,7 @@ public class AppointmentRequestDTO {
     private Long doctorId;
 
     @NotNull(message = "Ngày hẹn không được để trống")
+    @FutureOrPresent(message = "Ngày hẹn khám không được nằm trong quá khứ")
     private LocalDate appointmentDate;
 
     @NotNull(message = "Giờ hẹn không được để trống")

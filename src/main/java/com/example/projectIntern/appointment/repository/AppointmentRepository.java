@@ -22,4 +22,12 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
 
     @Query("SELECT a FROM Appointment a WHERE LOWER(a.patient.fullName) LIKE LOWER(CONCAT('%', :keyword, '%')) OR a.patient.phone LIKE CONCAT('%', :keyword, '%')")
     List<Appointment> searchAppointments(@Param("keyword") String keyword);
+
+    // Đếm số lượng lịch hẹn theo từng trạng thái
+    @Query("SELECT a.status, COUNT(a) FROM Appointment a GROUP BY a.status")
+    List<Object[]> countAppointmentsByStatus();
+
+    // Lấy số lượng lịch hẹn theo từng ngày (từ một mốc thời gian)
+    @Query("SELECT a.appointmentDate, COUNT(a) FROM Appointment a WHERE a.appointmentDate >= :startDate GROUP BY a.appointmentDate ORDER BY a.appointmentDate ASC")
+    List<Object[]> countAppointmentsByDateFrom(@Param("startDate") LocalDate startDate);
 }

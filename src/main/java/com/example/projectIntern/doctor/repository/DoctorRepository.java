@@ -20,4 +20,8 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
     @Query("SELECT d FROM Doctor d WHERE d.isActive = true AND LOWER(d.user.fullName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Doctor> searchDoctors(@Param("keyword") String keyword);
+
+    // Đếm số lượng bác sĩ đang hoạt động theo chuyên khoa
+    @Query("SELECT d.specialty, COUNT(d) FROM Doctor d WHERE d.isActive = true GROUP BY d.specialty")
+    List<Object[]> countActiveDoctorsBySpecialty();
 }
